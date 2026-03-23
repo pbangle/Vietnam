@@ -91,7 +91,10 @@ export default function VietnamItineraryPage() {
           note: "63€ · 2 noches",
           url: "https://www.booking.com/hotel/vn/green-land-cabins.es.html?label=gen173nr-10CAso9AFCEWdyZWVuLWxhbmQtY2FiaW5zSDNYBGgPiAEBmAEzuAEHyAEN2AED6AEB-AEBiAIBqAIBuAKns6rNBsACAdICJDVmNWNlNWQ0LTY0ZTgtNDU5YS05ZmY2LWEzNzUzNzBjNzMwMdgCAeACAQ&sid=cfa4356566fdcc3ae56de0018bf5c400&dist=0&group_adults=2&group_children=0&keep_landing=1&no_rooms=1&sb_price_type=total&type=total&",
         },
-        { place: "Nature Garden Ecolodge", note: "121€ · 2 noches · anular antes 31 marzo" },
+        {
+          place: "Nature Garden Ecolodge",
+          note: "121€ · 2 noches · anular antes 31 marzo",
+        },
         {
           place: "Hang Mua Ecolodge",
           note: "130€ · 2 noches",
@@ -218,7 +221,7 @@ export default function VietnamItineraryPage() {
                       <strong>{day.sleep.place}</strong>
                       <p style={styles.note}>{day.sleep.note}</p>
                       {day.sleep.url && (
-                        <a href={day.sleep.url} target="_blank" rel="noreferrer" style={styles.link}>
+                        <a href={day.sleep.url} target=\"_blank\" rel=\"noreferrer\" style={styles.link}>
                           Open hotel
                         </a>
                       )}
@@ -235,7 +238,7 @@ export default function VietnamItineraryPage() {
                           <strong>{option.place}</strong>
                           <p style={styles.note}>{option.note}</p>
                           {option.url && (
-                            <a href={option.url} target="_blank" rel="noreferrer" style={styles.link}>
+                            <a href={option.url} target=\"_blank\" rel=\"noreferrer\" style={styles.link}>
                               View option
                             </a>
                           )}
@@ -255,145 +258,145 @@ export default function VietnamItineraryPage() {
 
 const styles = {
   page: {
-    minHeight: "100vh",
-    background: "#121214",
-    color: "#f5f5f5",
-    fontFamily: "Arial, sans-serif",
-    padding: "24px 16px 48px",
+    minHeight: \"100vh\",
+    background: \"#121214\",
+    color: \"#f5f5f5\",
+    fontFamily: \"Arial, sans-serif\",
+    padding: \"24px 16px 48px\",
   },
   container: {
-    maxWidth: "900px",
-    margin: "0 auto",
+    maxWidth: \"900px\",
+    margin: \"0 auto\",
   },
   header: {
-    marginBottom: "24px",
+    marginBottom: \"24px\",
   },
   kicker: {
-    color: "#f0b6bc",
-    fontSize: "12px",
-    letterSpacing: "0.2em",
-    textTransform: "uppercase",
+    color: \"#f0b6bc\",
+    fontSize: \"12px\",
+    letterSpacing: \"0.2em\",
+    textTransform: \"uppercase\",
     margin: 0,
   },
   title: {
-    fontSize: "40px",
+    fontSize: \"40px\",
     lineHeight: 1.05,
-    margin: "10px 0 10px",
+    margin: \"10px 0 10px\",
   },
   subtitle: {
-    color: "#c8c8cc",
+    color: \"#c8c8cc\",
     margin: 0,
-    fontSize: "16px",
+    fontSize: \"16px\",
   },
   list: {
-    display: "grid",
-    gap: "14px",
+    display: \"grid\",
+    gap: \"14px\",
   },
   card: {
-    background: "#1b1b1f",
-    border: "1px solid #2a2a30",
-    borderRadius: "18px",
-    overflow: "hidden",
+    background: \"#1b1b1f\",
+    border: \"1px solid #2a2a30\",
+    borderRadius: \"18px\",
+    overflow: \"hidden\",
   },
   summary: {
-    listStyle: "none",
-    cursor: "pointer",
-    padding: "18px",
-    display: "flex",
-    justifyContent: "space-between",
-    alignItems: "flex-start",
-    gap: "12px",
+    listStyle: \"none\",
+    cursor: \"pointer\",
+    padding: \"18px\",
+    display: \"flex\",
+    justifyContent: \"space-between\",
+    alignItems: \"flex-start\",
+    gap: \"12px\",
   },
   topRow: {
-    display: "flex",
-    alignItems: "center",
-    gap: "10px",
-    marginBottom: "10px",
-    flexWrap: "wrap",
+    display: \"flex\",
+    alignItems: \"center\",
+    gap: \"10px\",
+    marginBottom: \"10px\",
+    flexWrap: \"wrap\",
   },
   dateBadge: {
-    background: "#fff",
-    color: "#7f1d1d",
-    borderRadius: "999px",
-    padding: "6px 10px",
-    fontSize: "12px",
+    background: \"#fff\",
+    color: \"#7f1d1d\",
+    borderRadius: \"999px\",
+    padding: \"6px 10px\",
+    fontSize: \"12px\",
     fontWeight: 700,
   },
   mood: {
-    color: "#9ca3af",
-    fontSize: "11px",
-    textTransform: "uppercase",
-    letterSpacing: "0.15em",
+    color: \"#9ca3af\",
+    fontSize: \"11px\",
+    textTransform: \"uppercase\",
+    letterSpacing: \"0.15em\",
   },
   cardTitle: {
-    margin: "0 0 6px",
-    fontSize: "24px",
+    margin: \"0 0 6px\",
+    fontSize: \"24px\",
   },
   cardSubtitle: {
-    margin: "0 0 8px",
-    color: "#d4d4d8",
+    margin: \"0 0 8px\",
+    color: \"#d4d4d8\",
   },
   city: {
     margin: 0,
-    color: "#a1a1aa",
-    fontSize: "14px",
+    color: \"#a1a1aa\",
+    fontSize: \"14px\",
   },
   chevron: {
-    color: "#a1a1aa",
-    fontSize: "24px",
+    color: \"#a1a1aa\",
+    fontSize: \"24px\",
     lineHeight: 1,
-    paddingTop: "6px",
+    paddingTop: \"6px\",
   },
   content: {
-    borderTop: "1px solid #2a2a30",
-    padding: "18px",
-    display: "grid",
-    gap: "18px",
+    borderTop: \"1px solid #2a2a30\",
+    padding: \"18px\",
+    display: \"grid\",
+    gap: \"18px\",
   },
   section: {},
   sectionTitle: {
-    margin: "0 0 10px",
-    fontSize: "15px",
-    color: "#f0b6bc",
+    margin: \"0 0 10px\",
+    fontSize: \"15px\",
+    color: \"#f0b6bc\",
   },
   tagsWrap: {
-    display: "flex",
-    flexWrap: "wrap",
-    gap: "8px",
+    display: \"flex\",
+    flexWrap: \"wrap\",
+    gap: \"8px\",
   },
   tag: {
-    border: "1px solid #33343a",
-    background: "#232329",
-    borderRadius: "999px",
-    padding: "8px 12px",
-    fontSize: "14px",
+    border: \"1px solid #33343a\",
+    background: \"#232329\",
+    borderRadius: \"999px\",
+    padding: \"8px 12px\",
+    fontSize: \"14px\",
   },
   ul: {
     margin: 0,
-    paddingLeft: "18px",
-    color: "#d4d4d8",
+    paddingLeft: \"18px\",
+    color: \"#d4d4d8\",
   },
   li: {
-    marginBottom: "8px",
+    marginBottom: \"8px\",
   },
   sleepBox: {
-    background: "#232329",
-    border: "1px solid #33343a",
-    borderRadius: "14px",
-    padding: "14px",
+    background: \"#232329\",
+    border: \"1px solid #33343a\",
+    borderRadius: \"14px\",
+    padding: \"14px\",
   },
   note: {
-    color: "#c8c8cc",
-    margin: "8px 0 0",
+    color: \"#c8c8cc\",
+    margin: \"8px 0 0\",
   },
   link: {
-    display: "inline-block",
-    marginTop: "10px",
-    color: "#ffffff",
-    textDecoration: "underline",
+    display: \"inline-block\",
+    marginTop: \"10px\",
+    color: \"#ffffff\",
+    textDecoration: \"underline\",
   },
   optionsList: {
-    display: "grid",
-    gap: "10px",
+    display: \"grid\",
+    gap: \"10px\",
   },
 };
