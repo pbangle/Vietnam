@@ -4,9 +4,233 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Vietnam Itinerary</title>
+    <style>
+      :root {
+        --bg: #121214;
+        --panel: #1b1b1f;
+        --panel-2: #232329;
+        --border: #2a2a30;
+        --border-2: #33343a;
+        --text: #f5f5f5;
+        --muted: #c8c8cc;
+        --muted-2: #a1a1aa;
+        --accent: #f0b6bc;
+        --accent-dark: #7f1d1d;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        font-family: Arial, sans-serif;
+        background: var(--bg);
+        color: var(--text);
+      }
+
+      a {
+        color: white;
+      }
+
+      .page {
+        min-height: 100vh;
+        padding: 24px 16px 48px;
+      }
+
+      .container {
+        max-width: 900px;
+        margin: 0 auto;
+      }
+
+      .header {
+        margin-bottom: 24px;
+      }
+
+      .kicker {
+        color: var(--accent);
+        font-size: 12px;
+        letter-spacing: 0.2em;
+        text-transform: uppercase;
+        margin: 0;
+      }
+
+      .title {
+        font-size: 40px;
+        line-height: 1.05;
+        margin: 10px 0;
+      }
+
+      .subtitle {
+        color: var(--muted);
+        margin: 0;
+        font-size: 16px;
+      }
+
+      .list {
+        display: grid;
+        gap: 14px;
+      }
+
+      .card {
+        background: var(--panel);
+        border: 1px solid var(--border);
+        border-radius: 18px;
+        overflow: hidden;
+      }
+
+      .summary {
+        list-style: none;
+        cursor: pointer;
+        padding: 18px;
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        gap: 12px;
+      }
+
+      .summary::-webkit-details-marker {
+        display: none;
+      }
+
+      .top-row {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        margin-bottom: 10px;
+        flex-wrap: wrap;
+      }
+
+      .date-badge {
+        background: white;
+        color: var(--accent-dark);
+        border-radius: 999px;
+        padding: 6px 10px;
+        font-size: 12px;
+        font-weight: 700;
+      }
+
+      .mood {
+        color: #9ca3af;
+        font-size: 11px;
+        text-transform: uppercase;
+        letter-spacing: 0.15em;
+      }
+
+      .card-title {
+        margin: 0 0 6px;
+        font-size: 24px;
+      }
+
+      .card-subtitle {
+        margin: 0 0 8px;
+        color: #d4d4d8;
+      }
+
+      .city {
+        margin: 0;
+        color: var(--muted-2);
+        font-size: 14px;
+      }
+
+      .chevron {
+        color: var(--muted-2);
+        font-size: 24px;
+        line-height: 1;
+        padding-top: 6px;
+      }
+
+      .content {
+        border-top: 1px solid var(--border);
+        padding: 18px;
+        display: grid;
+        gap: 18px;
+      }
+
+      .section-title {
+        margin: 0 0 10px;
+        font-size: 15px;
+        color: var(--accent);
+      }
+
+      .tags-wrap {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+      }
+
+      .tag {
+        border: 1px solid var(--border-2);
+        background: var(--panel-2);
+        border-radius: 999px;
+        padding: 8px 12px;
+        font-size: 14px;
+      }
+
+      .transport-list {
+        margin: 0;
+        padding-left: 18px;
+        color: #d4d4d8;
+      }
+
+      .transport-list li {
+        margin-bottom: 8px;
+      }
+
+      .sleep-box {
+        background: var(--panel-2);
+        border: 1px solid var(--border-2);
+        border-radius: 14px;
+        padding: 14px;
+      }
+
+      .note {
+        color: var(--muted);
+        margin: 8px 0 0;
+      }
+
+      .hotel-link {
+        display: inline-block;
+        margin-top: 10px;
+        color: white;
+        text-decoration: underline;
+      }
+
+      .options-list {
+        display: grid;
+        gap: 10px;
+      }
+
+      @media (max-width: 640px) {
+        .title {
+          font-size: 32px;
+        }
+
+        .summary {
+          padding: 16px;
+        }
+
+        .content {
+          padding: 16px;
+        }
+      }
+    </style>
   </head>
   <body>
-    <div id="root"></div>
-    <script type="module" src="/src/main.tsx"></script>
+    <main class="page">
+      <div class="container">
+        <header class="header">
+          <p class="kicker">Vietnam itinerary</p>
+          <h1 class="title">All your days in one screen</h1>
+          <p class="subtitle">
+            Very simple version for Vercel. Tap each day to open the plan.
+          </p>
+        </header>
+
+        <div id="app" class="list"></div>
+      </div>
+    </main>
+
+    <script type="module" src="/src/main.js"></script>
   </body>
 </html>

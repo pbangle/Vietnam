@@ -1,22 +1,4 @@
-type Sleep = {
-  place: string;
-  note: string;
-  url?: string;
-};
-
-type Day = {
-  date: string;
-  title: string;
-  subtitle: string;
-  city: string;
-  mood: string;
-  highlights: string[];
-  transport?: string[];
-  sleep?: Sleep;
-  sleepOptions?: Sleep[];
-};
-
-const itinerary: Day[] = [
+const itinerary = [
   {
     date: "27/03",
     title: "Ho Chi Minh",
@@ -130,8 +112,15 @@ const itinerary: Day[] = [
     subtitle: "Día completo",
     city: "Ninh Binh",
     mood: "Best of Ninh Binh",
-    highlights: ["Tam Coc boat ride", "Hang Mua viewpoint", "Bai Dinh pagoda o Trang An"],
-    sleep: { place: "Ninh Binh", note: "Segunda noche en la misma base/hotel que elijáis" },
+    highlights: [
+      "Tam Coc boat ride",
+      "Hang Mua viewpoint",
+      "Bai Dinh pagoda o Trang An",
+    ],
+    sleep: {
+      place: "Ninh Binh",
+      note: "Segunda noche en la misma base/hotel que elijáis",
+    },
   },
   {
     date: "02/04",
@@ -139,7 +128,10 @@ const itinerary: Day[] = [
     subtitle: "Último rato en Ninh Binh + noche en Hanoi",
     city: "Ninh Binh → Hanoi",
     mood: "Transit + city",
-    highlights: ["Todavía por Ninh Binh parte del día", "Llegada a Hanoi por la tarde/noche"],
+    highlights: [
+      "Todavía por Ninh Binh parte del día",
+      "Llegada a Hanoi por la tarde/noche",
+    ],
     transport: ["Traslado a Hanoi"],
     sleep: { place: "Hanoi", note: "Hotel en Hanoi por definir" },
   },
@@ -150,7 +142,10 @@ const itinerary: Day[] = [
     city: "Hanoi",
     mood: "City day",
     highlights: ["Día para Hanoi"],
-    sleep: { place: "Hanoi", note: "Segunda noche en Hanoi · hotel por definir" },
+    sleep: {
+      place: "Hanoi",
+      note: "Segunda noche en Hanoi · hotel por definir",
+    },
   },
   {
     date: "04/04",
@@ -159,7 +154,13 @@ const itinerary: Day[] = [
     city: "Hanoi → Ha Long Bay",
     mood: "Cruise day",
     transport: ["Salida 8:00–8:30 · crucero total 218€"],
-    highlights: ["Kayak", "Cuevas", "Isla Titop", "Sunset deck", "Dormir en el barco"],
+    highlights: [
+      "Kayak",
+      "Cuevas",
+      "Isla Titop",
+      "Sunset deck",
+      "Dormir en el barco",
+    ],
     sleep: { place: "Barco", note: "Noche a bordo" },
   },
   {
@@ -168,7 +169,11 @@ const itinerary: Day[] = [
     subtitle: "Vuelta del crucero",
     city: "Ha Long → Hanoi",
     mood: "Cruise + city",
-    highlights: ["Fin del crucero 11:00–12:00", "Transfer a Hanoi", "Pasar el día por Hanoi"],
+    highlights: [
+      "Fin del crucero 11:00–12:00",
+      "Transfer a Hanoi",
+      "Pasar el día por Hanoi",
+    ],
     sleep: { place: "Sereniity Villa", note: "1 noche · 30€" },
   },
   {
@@ -183,237 +188,93 @@ const itinerary: Day[] = [
   },
 ];
 
-  return (
-    <main style={styles.page}>
-      <div style={styles.container}>
-        <header style={styles.header}>
-          <p style={styles.kicker}>Vietnam itinerary</p>
-          <h1 style={styles.title}>All your days in one screen</h1>
-          <p style={styles.subtitle}>
-            Very simple version for Vercel. Tap each day to open the plan.
-          </p>
-        </header>
-
-        <div style={styles.list}>
-          {itinerary.map((day) => (
-            <details key={day.date + day.title} style={styles.card}>
-              <summary style={styles.summary}>
-                <div>
-                  <div style={styles.topRow}>
-                    <span style={styles.dateBadge}>{day.date}</span>
-                    <span style={styles.mood}>{day.mood}</span>
-                  </div>
-                  <h2 style={styles.cardTitle}>{day.title}</h2>
-                  <p style={styles.cardSubtitle}>{day.subtitle}</p>
-                  <p style={styles.city}>{day.city}</p>
-                </div>
-                <span style={styles.chevron}>⌄</span>
-              </summary>
-
-              <div style={styles.content}>
-                <section style={styles.section}>
-                  <h3 style={styles.sectionTitle}>Plan</h3>
-                  <div style={styles.tagsWrap}>
-                    {(day.highlights || []).map((item) => (
-                      <span key={item} style={styles.tag}>{item}</span>
-                    ))}
-                  </div>
-                </section>
-
-                {day.transport && (
-                  <section style={styles.section}>
-                    <h3 style={styles.sectionTitle}>Transport</h3>
-                    <ul style={styles.ul}>
-                      {day.transport.map((item) => (
-                        <li key={item} style={styles.li}>{item}</li>
-                      ))}
-                    </ul>
-                  </section>
-                )}
-
-                {day.sleep && (
-                  <section style={styles.section}>
-                    <h3 style={styles.sectionTitle}>Sleep</h3>
-                    <div style={styles.sleepBox}>
-                      <strong>{day.sleep.place}</strong>
-                      <p style={styles.note}>{day.sleep.note}</p>
-                      {day.sleep.url && (
-                        <a href={day.sleep.url} target=\"_blank\" rel=\"noreferrer\" style={styles.link}>
-                          Open hotel
-                        </a>
-                      )}
-                    </div>
-                  </section>
-                )}
-
-                {day.sleepOptions && (
-                  <section style={styles.section}>
-                    <h3 style={styles.sectionTitle}>Sleep options</h3>
-                    <div style={styles.optionsList}>
-                      {day.sleepOptions.map((option) => (
-                        <div key={option.place} style={styles.sleepBox}>
-                          <strong>{option.place}</strong>
-                          <p style={styles.note}>{option.note}</p>
-                          {option.url && (
-                            <a href={option.url} target=\"_blank\" rel=\"noreferrer\" style={styles.link}>
-                              View option
-                            </a>
-                          )}
-                        </div>
-                      ))}
-                    </div>
-                  </section>
-                )}
-              </div>
-            </details>
-          ))}
-        </div>
-      </div>
-    </main>
-  );
+function escapeHtml(text) {
+  return String(text)
+    .replaceAll("&", "&amp;")
+    .replaceAll("<", "&lt;")
+    .replaceAll(">", "&gt;")
+    .replaceAll('"', "&quot;")
+    .replaceAll("'", "&#39;");
 }
 
-const styles = {
-  page: {
-    minHeight: "100vh",
-    background: "#121214",
-    color: "#f5f5f5",
-    fontFamily: "Arial, sans-serif",
-    padding: "24px 16px 48px",
-  },
-  container: {
-    maxWidth: "900px",
-    margin: "0 auto",
-  },
-  header: {
-    marginBottom: "24px",
-  },
-  kicker: {
-    color: "#f0b6bc",
-    fontSize: "12px",
-    letterSpacing: "0.2em",
-    textTransform: "uppercase",
-    margin: 0,
-  },
-  title: {
-    fontSize: "40px",
-    lineHeight: 1.05,
-    margin: "10px 0 10px",
-  },
-  subtitle: {
-    color: "#c8c8cc",
-    margin: 0,
-    fontSize: "16px",
-  },
-  list: {
-    display: "grid",
-    gap: "14px",
-  },
-  card: {
-    background: "#1b1b1f",
-    border: "1px solid #2a2a30",
-    borderRadius: "18px",
-    overflow: "hidden",
-  },
-  summary: {
-    listStyle: "none",
-    cursor: "pointer",
-    padding: "18px",
-    display: "flex",
-    justifyContent: "space-between",
-    alignItems: "flex-start",
-    gap: "12px",
-  },
-  topRow: {
-    display: "flex",
-    alignItems: "center",
-    gap: "10px",
-    marginBottom: "10px",
-    flexWrap: "wrap",
-  },
-  dateBadge: {
-    background: "#fff",
-    color: "#7f1d1d",
-    borderRadius: "999px",
-    padding: "6px 10px",
-    fontSize: "12px",
-    fontWeight: 700,
-  },
-  mood: {
-    color: "#9ca3af",
-    fontSize: "11px",
-    textTransform: "uppercase",
-    letterSpacing: "0.15em",
-  },
-  cardTitle: {
-    margin: "0 0 6px",
-    fontSize: "24px",
-  },
-  cardSubtitle: {
-    margin: "0 0 8px",
-    color: "#d4d4d8",
-  },
-  city: {
-    margin: 0,
-    color: "#a1a1aa",
-    fontSize: "14px",
-  },
-  chevron: {
-    color: "#a1a1aa",
-    fontSize: "24px",
-    lineHeight: 1,
-    paddingTop: "6px",
-  },
-  content: {
-    borderTop: "1px solid #2a2a30",
-    padding: "18px",
-    display: "grid",
-    gap: "18px",
-  },
-  section: {},
-  sectionTitle: {
-    margin: "0 0 10px",
-    fontSize: "15px",
-    color: "#f0b6bc",
-  },
-  tagsWrap: {
-    display: "flex",
-    flexWrap: "wrap",
-    gap: "8px",
-  },
-  tag: {
-    border: "1px solid #33343a",
-    background: "#232329",
-    borderRadius: "999px",
-    padding: "8px 12px",
-    fontSize: "14px",
-  },
-  ul: {
-    margin: 0,
-    paddingLeft: "18px",
-    color: "#d4d4d8",
-  },
-  li: {
-    marginBottom: "8px",
-  },
-  sleepBox: {
-    background: "#232329",
-    border: "1px solid #33343a",
-    borderRadius: "14px",
-    padding: "14px",
-  },
-  note: {
-    color: "#c8c8cc",
-    margin: "8px 0 0",
-  },
-  link: {
-    display: "inline-block",
-    marginTop: "10px",
-    color: "#ffffff",
-    textDecoration: "underline",
-  },
-  optionsList: {
-    display: "grid",
-    gap: "10px",
-  },
-};
+function renderSleepBox(item, label) {
+  return `
+    <div class="sleep-box">
+      <strong>${escapeHtml(item.place)}</strong>
+      <p class="note">${escapeHtml(item.note)}</p>
+      ${
+        item.url
+          ? `<a class="hotel-link" href="${item.url}" target="_blank" rel="noreferrer">${label}</a>`
+          : ""
+      }
+    </div>
+  `;
+}
+
+const app = document.getElementById("app");
+
+app.innerHTML = itinerary
+  .map((day) => {
+    const highlights = (day.highlights || [])
+      .map((item) => `<span class="tag">${escapeHtml(item)}</span>`)
+      .join("");
+
+    const transport = day.transport
+      ? `
+        <section>
+          <h3 class="section-title">Transport</h3>
+          <ul class="transport-list">
+            ${day.transport.map((item) => `<li>${escapeHtml(item)}</li>`).join("")}
+          </ul>
+        </section>
+      `
+      : "";
+
+    const sleep = day.sleep
+      ? `
+        <section>
+          <h3 class="section-title">Sleep</h3>
+          ${renderSleepBox(day.sleep, "Open hotel")}
+        </section>
+      `
+      : "";
+
+    const sleepOptions = day.sleepOptions
+      ? `
+        <section>
+          <h3 class="section-title">Sleep options</h3>
+          <div class="options-list">
+            ${day.sleepOptions.map((item) => renderSleepBox(item, "View option")).join("")}
+          </div>
+        </section>
+      `
+      : "";
+
+    return `
+      <details class="card">
+        <summary class="summary">
+          <div>
+            <div class="top-row">
+              <span class="date-badge">${escapeHtml(day.date)}</span>
+              <span class="mood">${escapeHtml(day.mood)}</span>
+            </div>
+            <h2 class="card-title">${escapeHtml(day.title)}</h2>
+            <p class="card-subtitle">${escapeHtml(day.subtitle)}</p>
+            <p class="city">${escapeHtml(day.city)}</p>
+          </div>
+          <span class="chevron">⌄</span>
+        </summary>
+
+        <div class="content">
+          <section>
+            <h3 class="section-title">Plan</h3>
+            <div class="tags-wrap">${highlights}</div>
+          </section>
+          ${transport}
+          ${sleep}
+          ${sleepOptions}
+        </div>
+      </details>
+    `;
+  })
+  .join("");
