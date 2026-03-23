@@ -5,6 +5,7 @@ const itinerary = [
     subtitle: "Arrival + easy first day",
     city: "Ho Chi Minh",
     mood: "Arrival day",
+    icon: "✦",
     highlights: [
       "Arrive 5:55 AM",
       "Notre Dame Cathedral",
@@ -26,6 +27,7 @@ const itinerary = [
     subtitle: "Morning tour, afternoon flight, evening in Hoi An",
     city: "Ho Chi Minh → Da Nang → Hoi An",
     mood: "Travel day",
+    icon: "✈",
     transport: [
       "Cu Chi Tunnels tour · 7:30–14:00",
       "Flight Ho Chi Minh → Da Nang · 16:55–18:05 · 106€",
@@ -52,6 +54,7 @@ const itinerary = [
     subtitle: "Full day",
     city: "Hoi An",
     mood: "Relax day",
+    icon: "✦",
     highlights: [
       "Coconut basket boats or An Bang beach",
       "Cute cafés",
@@ -71,6 +74,7 @@ const itinerary = [
     subtitle: "Scenic transfer + night train",
     city: "Hoi An → Hue → Hanoi",
     mood: "Scenic transfer",
+    icon: "✦",
     transport: [
       "Private car or taxi Hoi An → Hue",
       "Stop at Hai Van Pass",
@@ -93,6 +97,7 @@ const itinerary = [
     subtitle: "Arrival + Tam Coc afternoon",
     city: "Hanoi → Ninh Binh",
     mood: "Nature day",
+    icon: "✦",
     transport: [
       "Arrive early in Hanoi",
       "Transfer to Ninh Binh / Tam Coc · around 2 hours",
@@ -104,7 +109,7 @@ const itinerary = [
     sleepOptions: [
       {
         place: "Hidden Valley Eco Retreat Trang An",
-        note: "2 nights · 63€",
+        note: "2 nights · best value option",
         price: "63€",
         url: "https://www.booking.com/hotel/vn/green-land-cabins.es.html?label=gen173nr-10CAso9AFCEWdyZWVuLWxhbmQtY2FiaW5zSDNYBGgPiAEBmAEzuAEHyAEN2AED6AEB-AEBiAIBqAIBuAKns6rNBsACAdICJDVmNWNlNWQ0LTY0ZTgtNDU5YS05ZmY2LWEzNzUzNzBjNzMwMdgCAeACAQ&sid=cfa4356566fdcc3ae56de0018bf5c400&dist=0&group_adults=2&group_children=0&keep_landing=1&no_rooms=1&sb_price_type=total&type=total&",
       },
@@ -122,7 +127,7 @@ const itinerary = [
       {
         place: "Emeralda Resort",
         note: "Premium option",
-        price: "Price not closed",
+        price: "TBD",
         url: "https://www.booking.com/hotel/vn/emeralda-ninh-binh-resort-and-spa.es.html?aid=2336990&label=en-au-booking-desktop-LWJbXP0fLLuHVdmWiiFIygS652804038914%3Apl%3Ata%3Ap1%3Ap2%3Aac%3Aap%3Aneg%3Afi%3Atikwd-1214534129%3Alp9071353%3Ali%3Adec%3Adm&sid=cfa4356566fdcc3ae56de0018bf5c400&all_sr_blocks=35631801_0_2_1_0&checkin=2026-03-31&checkout=2026-04-02&dist=0&group_adults=2&group_children=0&hapos=2&highlighted_blocks=35631801_0_2_1_0&hpos=2&matching_block_id=35631801_0_2_1_0&nflt=class%3D5%3Bht_id%3D206&no_rooms=1&req_adults=2&req_children=0&room1=A%2CA&sb_price_type=total&sr_order=popularity&sr_pri_blocks=35631801_0_2_1_0__431156601&srepoch=1772690455&srpvid=2bf12a46efab01ff&type=total&ucfs=1&",
       },
     ],
@@ -133,6 +138,7 @@ const itinerary = [
     subtitle: "Best full day there",
     city: "Ninh Binh",
     mood: "Best of Ninh Binh",
+    icon: "✦",
     highlights: [
       "Tam Coc boat ride",
       "Hang Mua viewpoint",
@@ -150,6 +156,7 @@ const itinerary = [
     subtitle: "Last hours in Ninh Binh + Hanoi at night",
     city: "Ninh Binh → Hanoi",
     mood: "Transit + city",
+    icon: "✦",
     transport: ["Transfer to Hanoi"],
     highlights: [
       "Still around Ninh Binh for part of the day",
@@ -167,6 +174,7 @@ const itinerary = [
     subtitle: "City day",
     city: "Hanoi",
     mood: "City day",
+    icon: "✦",
     highlights: ["Day in Hanoi"],
     sleep: {
       place: "Hanoi",
@@ -180,6 +188,7 @@ const itinerary = [
     subtitle: "Cruise day 1",
     city: "Hanoi → Ha Long Bay",
     mood: "Cruise day",
+    icon: "✦",
     transport: [
       "Departure from Hanoi 8:00–8:30",
       "Cruise total: 218€",
@@ -203,6 +212,7 @@ const itinerary = [
     subtitle: "Cruise day 2 + back to Hanoi",
     city: "Ha Long → Hanoi",
     mood: "Cruise + city",
+    icon: "✦",
     highlights: [
       "Cruise ends 11:00–12:00",
       "Transfer back to Hanoi",
@@ -220,6 +230,7 @@ const itinerary = [
     subtitle: "Departure day",
     city: "Hanoi → Ho Chi Minh",
     mood: "Return day",
+    icon: "✈",
     transport: [
       "Flight 5:20 AM Hanoi → Ho Chi Minh",
       "Taxi to airport around 10–15€ · roughly 20 min",
@@ -248,7 +259,7 @@ function renderSleepBox(item, label) {
   return `
     <div class="sleep-box">
       <div class="sleep-title">
-        <strong>${escapeHtml(item.place)}</strong>
+        <strong class="sleep-name">${escapeHtml(item.place)}</strong>
         ${item.price ? `<span class="price-pill">${escapeHtml(item.price)}</span>` : ""}
       </div>
       <p class="note">${escapeHtml(item.note || "")}</p>
@@ -308,7 +319,7 @@ app.innerHTML = itinerary
               <span class="date-badge">${escapeHtml(day.date)}</span>
               <span class="mood">${escapeHtml(day.mood)}</span>
             </div>
-            <h2 class="card-title">${escapeHtml(day.title)}</h2>
+            <h2 class="card-title">${escapeHtml(day.icon)} ${escapeHtml(day.title)}</h2>
             <p class="card-subtitle">${escapeHtml(day.subtitle)}</p>
             <p class="city">${escapeHtml(day.city)}</p>
           </div>

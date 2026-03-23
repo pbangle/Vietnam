@@ -8,18 +8,18 @@
       :root {
         --bg: #151216;
         --bg-soft: #1b161c;
-        --card: rgba(33, 24, 31, 0.92);
-        --card-2: rgba(42, 30, 39, 0.92);
+        --card: rgba(33, 24, 31, 0.9);
+        --card-2: rgba(43, 31, 39, 0.9);
         --border: rgba(255, 255, 255, 0.08);
         --border-strong: rgba(255, 255, 255, 0.12);
         --text: #f8f4f6;
-        --muted: #d3c7cd;
-        --muted-2: #ad9fa7;
-        --accent: #f3b3c0;
-        --accent-2: #e87a92;
-        --accent-3: #7c2235;
-        --white: #ffffff;
-        --shadow: 0 18px 45px rgba(0, 0, 0, 0.28);
+        --muted: #d2c7cd;
+        --muted-2: #aa9ea5;
+        --accent: #efb3c0;
+        --accent-2: #d86a86;
+        --accent-dark: #7c2235;
+        --shadow: 0 18px 50px rgba(0, 0, 0, 0.28);
+        --shadow-soft: 0 10px 25px rgba(0, 0, 0, 0.18);
       }
 
       * {
@@ -32,16 +32,16 @@
 
       body {
         margin: 0;
-        font-family: Inter, Arial, sans-serif;
+        font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
         background:
-          radial-gradient(circle at top right, rgba(232, 122, 146, 0.12), transparent 28%),
-          radial-gradient(circle at top left, rgba(243, 179, 192, 0.08), transparent 24%),
-          linear-gradient(180deg, #171217 0%, #120f13 100%);
+          radial-gradient(circle at top right, rgba(216, 106, 134, 0.12), transparent 28%),
+          radial-gradient(circle at top left, rgba(239, 179, 192, 0.08), transparent 24%),
+          linear-gradient(180deg, #171217 0%, #110f12 100%);
         color: var(--text);
       }
 
       a {
-        color: var(--white);
+        color: white;
       }
 
       .page {
@@ -55,15 +55,28 @@
       }
 
       .hero {
+        position: relative;
+        overflow: hidden;
         margin-bottom: 26px;
-        padding: 26px;
+        padding: 28px;
         border: 1px solid var(--border);
-        border-radius: 28px;
+        border-radius: 30px;
         background:
-          linear-gradient(135deg, rgba(232, 122, 146, 0.09), rgba(255,255,255,0.02)),
-          rgba(27, 22, 28, 0.8);
+          linear-gradient(135deg, rgba(216, 106, 134, 0.08), rgba(255,255,255,0.02)),
+          rgba(27, 22, 28, 0.82);
         box-shadow: var(--shadow);
         backdrop-filter: blur(10px);
+      }
+
+      .hero::after {
+        content: "";
+        position: absolute;
+        inset: auto -60px -60px auto;
+        width: 180px;
+        height: 180px;
+        border-radius: 999px;
+        background: radial-gradient(circle, rgba(239, 179, 192, 0.12), transparent 70%);
+        pointer-events: none;
       }
 
       .kicker {
@@ -86,7 +99,7 @@
         margin: 0;
         font-size: 16px;
         max-width: 720px;
-        line-height: 1.5;
+        line-height: 1.55;
       }
 
       .top-summary {
@@ -103,6 +116,7 @@
         padding: 9px 12px;
         font-size: 13px;
         color: var(--muted);
+        box-shadow: var(--shadow-soft);
       }
 
       .list {
@@ -131,7 +145,7 @@
       }
 
       .summary:hover {
-        background: rgba(255,255,255,0.02);
+        background: rgba(255,255,255,0.018);
       }
 
       .summary::-webkit-details-marker {
@@ -151,8 +165,8 @@
       }
 
       .date-badge {
-        background: var(--white);
-        color: var(--accent-3);
+        background: white;
+        color: var(--accent-dark);
         border-radius: 999px;
         padding: 6px 11px;
         font-size: 12px;
@@ -206,10 +220,10 @@
 
       .section-title {
         margin: 0 0 10px;
-        font-size: 14px;
+        font-size: 13px;
         color: var(--accent);
         text-transform: uppercase;
-        letter-spacing: 0.12em;
+        letter-spacing: 0.14em;
       }
 
       .tags-wrap {
@@ -253,11 +267,16 @@
         flex-wrap: wrap;
       }
 
+      .sleep-name {
+        font-size: 15px;
+        letter-spacing: -0.01em;
+      }
+
       .price-pill {
         font-size: 12px;
         color: var(--accent);
-        border: 1px solid rgba(243, 179, 192, 0.2);
-        background: rgba(243, 179, 192, 0.06);
+        border: 1px solid rgba(239, 179, 192, 0.18);
+        background: rgba(239, 179, 192, 0.05);
         border-radius: 999px;
         padding: 6px 10px;
       }
@@ -270,10 +289,18 @@
 
       .hotel-link {
         display: inline-block;
-        margin-top: 10px;
-        color: var(--white);
-        text-decoration: underline;
-        text-underline-offset: 3px;
+        margin-top: 12px;
+        color: white;
+        text-decoration: none;
+        border: 1px solid var(--border-strong);
+        background: rgba(255,255,255,0.04);
+        border-radius: 999px;
+        padding: 9px 12px;
+        font-size: 13px;
+      }
+
+      .hotel-link:hover {
+        background: rgba(255,255,255,0.07);
       }
 
       .options-list {
@@ -327,21 +354,21 @@
           <p class="kicker">Vietnam itinerary</p>
           <h1 class="title">All your days in one screen</h1>
           <p class="subtitle">
-            Simple, visual, and all in one place. Tap each day to open the plan,
-            transport, and hotel details.
+            A cleaner, softer version of the trip plan — with transport, stays, hotel links,
+            and a light pink/red aesthetic inspired by Vietnam.
           </p>
 
           <div class="top-summary">
             <span class="pill">27/03 → 06/04</span>
             <span class="pill">Ho Chi Minh · Hoi An · Hue · Ninh Binh · Hanoi · Ha Long</span>
-            <span class="pill">Hotels + links included</span>
+            <span class="pill">Hotels + useful links included</span>
           </div>
         </section>
 
         <div id="app" class="list"></div>
 
         <p class="footer-note">
-          Vietnam trip plan · soft pink/red theme · lightweight version for Vercel
+          Vietnam trip plan · premium lightweight version for Vercel
         </p>
       </div>
     </main>
