@@ -40,27 +40,39 @@
         color: var(--text);
       }
 
+      body.overlay-open {
+        overflow: hidden;
+      }
+
       a {
         color: white;
       }
 
+      button {
+        font: inherit;
+      }
+
       .page {
-        min-height: 100vh;
-        padding: 24px 16px 48px;
+        height: 100dvh;
+        overflow: hidden;
+        padding: 14px 12px 16px;
       }
 
       .container {
-        max-width: 980px;
+        max-width: 760px;
+        height: 100%;
         margin: 0 auto;
+        display: grid;
+        grid-template-rows: auto minmax(0, 1fr) auto;
+        gap: 12px;
       }
 
       .hero {
         position: relative;
         overflow: hidden;
-        margin-bottom: 26px;
-        padding: 28px;
+        padding: 18px 18px 16px;
         border: 1px solid var(--border);
-        border-radius: 30px;
+        border-radius: 26px;
         background:
           linear-gradient(135deg, rgba(216, 106, 134, 0.08), rgba(255,255,255,0.02)),
           rgba(27, 22, 28, 0.82);
@@ -71,9 +83,9 @@
       .hero::after {
         content: "";
         position: absolute;
-        inset: auto -60px -60px auto;
-        width: 180px;
-        height: 180px;
+        inset: auto -50px -50px auto;
+        width: 150px;
+        height: 150px;
         border-radius: 999px;
         background: radial-gradient(circle, rgba(239, 179, 192, 0.12), transparent 70%);
         pointer-events: none;
@@ -81,87 +93,231 @@
 
       .kicker {
         color: var(--accent);
-        font-size: 12px;
-        letter-spacing: 0.24em;
+        font-size: 11px;
+        letter-spacing: 0.22em;
         text-transform: uppercase;
-        margin: 0 0 10px;
+        margin: 0 0 8px;
       }
 
       .title {
-        font-size: 42px;
-        line-height: 1.02;
-        margin: 0 0 10px;
+        font-size: 32px;
+        line-height: 0.98;
+        margin: 0 0 8px;
         letter-spacing: -0.03em;
       }
 
       .subtitle {
         color: var(--muted);
         margin: 0;
-        font-size: 16px;
-        max-width: 720px;
-        line-height: 1.55;
+        font-size: 14px;
+        max-width: 560px;
+        line-height: 1.45;
       }
 
       .top-summary {
         display: flex;
         flex-wrap: wrap;
-        gap: 10px;
-        margin-top: 18px;
+        gap: 8px;
+        margin-top: 14px;
       }
 
       .pill {
         border: 1px solid var(--border);
         background: rgba(255,255,255,0.04);
         border-radius: 999px;
-        padding: 9px 12px;
-        font-size: 13px;
+        padding: 7px 11px;
+        font-size: 12px;
         color: var(--muted);
         box-shadow: var(--shadow-soft);
       }
 
-      .list {
+      .roadmap {
+        position: relative;
+        min-height: 0;
         display: grid;
-        gap: 14px;
+        grid-template-rows: repeat(var(--day-count), minmax(0, 1fr));
+        gap: 7px;
+        padding: 6px 0;
       }
 
-      .card {
-        background: var(--card);
+      .roadmap::before {
+        content: "";
+        position: absolute;
+        top: 10px;
+        bottom: 10px;
+        left: 9px;
+        width: 2px;
+        border-radius: 999px;
+        background: linear-gradient(
+          180deg,
+          rgba(239, 179, 192, 0.7),
+          rgba(216, 106, 134, 0.24)
+        );
+        pointer-events: none;
+      }
+
+      .roadmap-item {
+        position: relative;
+        z-index: 1;
+        width: 100%;
         border: 1px solid var(--border);
-        border-radius: 24px;
-        overflow: hidden;
-        box-shadow: var(--shadow);
+        background: rgba(255, 255, 255, 0.035);
+        border-radius: 18px;
+        color: inherit;
+        text-align: left;
+        display: grid;
+        grid-template-columns: 18px 62px minmax(0, 1fr);
+        align-items: center;
+        gap: 10px;
+        padding: 10px 12px;
+        min-height: 0;
+        cursor: pointer;
+        box-shadow: var(--shadow-soft);
         backdrop-filter: blur(10px);
+        transition:
+          transform 0.18s ease,
+          border-color 0.18s ease,
+          background 0.18s ease;
       }
 
-      .summary {
-        list-style: none;
-        cursor: pointer;
-        padding: 18px;
+      .roadmap-item:hover {
+        transform: translateY(-1px);
+        border-color: rgba(239, 179, 192, 0.28);
+        background: rgba(255, 255, 255, 0.06);
+      }
+
+      .roadmap-item:active {
+        transform: scale(0.995);
+      }
+
+      .roadmap-item.active {
+        border-color: rgba(239, 179, 192, 0.34);
+        background: rgba(216, 106, 134, 0.08);
+      }
+
+      .roadmap-dot {
+        width: 12px;
+        height: 12px;
+        border-radius: 999px;
+        background: linear-gradient(180deg, #ffd8e1, #efb3c0);
+        box-shadow:
+          0 0 0 4px rgba(21, 18, 22, 0.98),
+          0 0 0 5px rgba(239, 179, 192, 0.08);
+      }
+
+      .roadmap-date {
+        font-size: 12px;
+        font-weight: 700;
+        color: var(--accent);
+        letter-spacing: 0.02em;
+        white-space: nowrap;
+      }
+
+      .roadmap-label {
+        font-size: 14px;
+        font-weight: 600;
+        color: var(--text);
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+
+      .footer-note {
+        margin: 0;
+        color: var(--muted-2);
+        font-size: 12px;
+        text-align: center;
+      }
+
+      .overlay {
+        position: fixed;
+        inset: 0;
+        display: flex;
+        justify-content: center;
+        align-items: flex-end;
+        background: rgba(9, 7, 10, 0.5);
+        opacity: 0;
+        pointer-events: none;
+        transition: opacity 0.25s ease;
+        z-index: 50;
+      }
+
+      .overlay.open {
+        opacity: 1;
+        pointer-events: auto;
+      }
+
+      .overlay-panel {
+        width: min(100%, 760px);
+        height: 100dvh;
+        background:
+          linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.015)),
+          #171217;
+        border: 1px solid var(--border);
+        border-bottom: 0;
+        border-radius: 28px 28px 0 0;
+        box-shadow: var(--shadow);
+        transform: translateY(100%);
+        transition: transform 0.34s cubic-bezier(0.22, 1, 0.36, 1);
+        overflow: hidden;
+        display: grid;
+        grid-template-rows: auto minmax(0, 1fr);
+      }
+
+      .overlay.open .overlay-panel {
+        transform: translateY(0);
+      }
+
+      .overlay-bar {
+        position: sticky;
+        top: 0;
+        z-index: 2;
         display: flex;
         justify-content: space-between;
-        align-items: flex-start;
-        gap: 14px;
-        transition: background 0.2s ease;
+        align-items: center;
+        gap: 12px;
+        padding: 14px 16px 12px;
+        background: rgba(23, 18, 23, 0.9);
+        backdrop-filter: blur(12px);
+        border-bottom: 1px solid var(--border);
       }
 
-      .summary:hover {
-        background: rgba(255,255,255,0.018);
+      .close-btn {
+        border: 1px solid var(--border-strong);
+        background: rgba(255,255,255,0.05);
+        color: white;
+        border-radius: 999px;
+        padding: 9px 14px;
+        cursor: pointer;
       }
 
-      .summary::-webkit-details-marker {
-        display: none;
+      .close-btn:hover {
+        background: rgba(255,255,255,0.08);
       }
 
-      .summary-left {
-        min-width: 0;
+      .overlay-hint {
+        font-size: 12px;
+        color: var(--muted-2);
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
       }
 
-      .top-row {
+      .overlay-scroll {
+        min-height: 0;
+        overflow: auto;
+        padding: 14px 16px 26px;
+      }
+
+      .detail-hero {
+        margin-bottom: 20px;
+      }
+
+      .detail-top-row {
         display: flex;
         align-items: center;
         gap: 10px;
-        margin-bottom: 10px;
         flex-wrap: wrap;
+        margin-bottom: 12px;
       }
 
       .date-badge {
@@ -180,16 +336,18 @@
         letter-spacing: 0.16em;
       }
 
-      .card-title {
+      .detail-title {
         margin: 0 0 6px;
-        font-size: 25px;
-        letter-spacing: -0.02em;
+        font-size: 31px;
+        line-height: 1.02;
+        letter-spacing: -0.03em;
       }
 
-      .card-subtitle {
+      .detail-subtitle {
         margin: 0 0 8px;
         color: var(--muted);
         font-size: 15px;
+        line-height: 1.5;
       }
 
       .city {
@@ -198,24 +356,17 @@
         font-size: 14px;
       }
 
-      .chevron {
-        color: var(--muted-2);
-        font-size: 24px;
-        line-height: 1;
-        padding-top: 6px;
-        transition: transform 0.2s ease;
-      }
-
-      details[open] .chevron {
-        transform: rotate(180deg);
-      }
-
-      .content {
-        border-top: 1px solid var(--border);
-        padding: 18px;
+      .detail-content {
         display: grid;
         gap: 18px;
-        background: linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0.02));
+      }
+
+      .detail-section {
+        background: var(--card);
+        border: 1px solid var(--border);
+        border-radius: 22px;
+        padding: 16px;
+        box-shadow: var(--shadow-soft);
       }
 
       .section-title {
@@ -250,6 +401,11 @@
       .transport-list li {
         margin-bottom: 8px;
         line-height: 1.45;
+      }
+
+      .options-list {
+        display: grid;
+        gap: 10px;
       }
 
       .sleep-box {
@@ -303,46 +459,78 @@
         background: rgba(255,255,255,0.07);
       }
 
-      .options-list {
-        display: grid;
-        gap: 10px;
-      }
+      @media (min-width: 761px) {
+        .overlay {
+          padding: 16px;
+        }
 
-      .footer-note {
-        margin-top: 18px;
-        color: var(--muted-2);
-        font-size: 13px;
-        text-align: center;
+        .overlay-panel {
+          height: min(92dvh, 900px);
+          border: 1px solid var(--border);
+          border-radius: 30px;
+        }
       }
 
       @media (max-width: 640px) {
         .page {
-          padding: 18px 12px 38px;
+          padding: 12px 10px 12px;
+        }
+
+        .container {
+          gap: 10px;
         }
 
         .hero {
-          padding: 20px;
+          padding: 16px 16px 14px;
           border-radius: 22px;
         }
 
         .title {
-          font-size: 32px;
+          font-size: 28px;
         }
 
-        .summary {
-          padding: 16px;
+        .subtitle {
+          font-size: 13px;
         }
 
-        .content {
-          padding: 16px;
+        .top-summary {
+          gap: 7px;
         }
 
-        .card {
-          border-radius: 20px;
+        .pill {
+          font-size: 11px;
+          padding: 6px 10px;
         }
 
-        .card-title {
-          font-size: 22px;
+        .roadmap {
+          gap: 6px;
+        }
+
+        .roadmap-item {
+          grid-template-columns: 18px 56px minmax(0, 1fr);
+          gap: 9px;
+          padding: 9px 10px;
+          border-radius: 16px;
+        }
+
+        .roadmap-label {
+          font-size: 13px;
+        }
+
+        .footer-note {
+          font-size: 11px;
+        }
+
+        .overlay-bar {
+          padding-top: max(14px, env(safe-area-inset-top));
+        }
+
+        .overlay-scroll {
+          padding-bottom: max(24px, env(safe-area-inset-bottom));
+        }
+
+        .detail-title {
+          font-size: 28px;
         }
       }
     </style>
@@ -354,23 +542,30 @@
           <p class="kicker">Gemma & Alex in Vietnam</p>
           <h1 class="title">Gemma & Alex’s Vietnam Trip</h1>
           <p class="subtitle">
-            The full route, day by day — a softer and more personal version of your trip,
-            with plans, transport, stays, and all the key details in one place.
+            A cleaner mobile version of the trip — open any day to see the full plan.
           </p>
 
           <div class="top-summary">
             <span class="pill">27/03 → 06/04</span>
-            <span class="pill">Ho Chi Minh · Hoi An · Hue · Ninh Binh · Hanoi · Ha Long</span>
+            <span class="pill">11 days · Vietnam route</span>
           </div>
         </section>
 
-        <div id="app" class="list"></div>
+        <div id="app" class="roadmap" aria-label="Trip roadmap"></div>
 
-        <p class="footer-note">
-          Vietnam trip plan · premium lightweight version for Vercel
-        </p>
+        <p class="footer-note">Tap any day to open the details</p>
       </div>
     </main>
+
+    <div id="dayOverlay" class="overlay" aria-hidden="true">
+      <div class="overlay-panel" role="dialog" aria-modal="true">
+        <div class="overlay-bar">
+          <button id="closeOverlay" class="close-btn" type="button">← Back</button>
+          <span class="overlay-hint">Day details</span>
+        </div>
+        <div id="overlayContent" class="overlay-scroll"></div>
+      </div>
+    </div>
 
     <script type="module" src="/src/main.js"></script>
   </body>
