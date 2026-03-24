@@ -9,6 +9,14 @@ function escapeHtml(text) {
     .replaceAll("'", "&#39;");
 }
 
+function encodeMapQuery(text) {
+  return encodeURIComponent(String(text ?? "").trim());
+}
+
+function getGoogleMapsLink(query) {
+  return `https://www.google.com/maps/search/?api=1&query=${encodeMapQuery(query)}`;
+}
+
 function renderSleepBox(item, label) {
   return `
     <div class="sleep-box">
@@ -78,6 +86,88 @@ function getRoadmapLabel(day) {
   }
 
   return day.subtitle || day.title || place;
+}
+
+function getCityMapQuery(day) {
+  return day.mapQuery || `${getLastPlace(day)}, Vietnam`;
+}
+
+function getHotelMapQuery(day) {
+  if (day.hotelMapQuery) {
+    return day.hotelMapQuery;
+  }
+
+  const stay = day.sleep;
+  if (!stay?.place) return "";
+
+  const place = stay.place.trim();
+  if (!place || place === "—" || place.toLowerCase() === "night train" || place.toLowerCase() === "cruise boat") {
+    return "";
+  }
+
+  if ((stay.price || "").toLowerCase() === "tbd") {
+    return "";
+  }
+
+  const note = (stay.note || "").toLowerCase();
+  if (note.includes("still to define") || note.includes("same hotel you choose")) {
+    return "";
+  }
+
+  return `${place}, ${getLastPlace(day)}, Vietnam`;
+}
+
+function renderQuickActions(day) {
+  const cityQuery = getCityMapQuery(day);
+  const hotelQuery = getHotelMapQuery(day);
+
+  const cityAction = cityQuery
+    ? `
+      <a
+        class="map-action"
+        href="${getGoogleMapsLink(cityQuery)}"
+        target="_blank"
+        rel="noreferrer"
+      >
+        <span class="map-action-icon" aria-hidden="true">📍</span>
+        <span class="map-action-text">
+          <span class="map-action-label">Open city</span>
+          <span class="map-action-value">${escapeHtml(getLastPlace(day))}</span>
+        </span>
+      </a>
+    `
+    : "";
+
+  const hotelAction = hotelQuery
+    ? `
+      <a
+        class="map-action"
+        href="${getGoogleMapsLink(hotelQuery)}"
+        target="_blank"
+        rel="noreferrer"
+      >
+        <span class="map-action-icon" aria-hidden="true">🏨</span>
+        <span class="map-action-text">
+          <span class="map-action-label">Open stay</span>
+          <span class="map-action-value">${escapeHtml(day.sleep?.place || "Hotel")}</span>
+        </span>
+      </a>
+    `
+    : "";
+
+  if (!cityAction && !hotelAction) {
+    return "";
+  }
+
+  return `
+    <section class="detail-section">
+      <h3 class="section-title">Quick actions</h3>
+      <div class="quick-actions">
+        ${cityAction}
+        ${hotelAction}
+      </div>
+    </section>
+  `;
 }
 
 function renderCover(day) {
@@ -170,6 +260,8 @@ function renderDayDetail(day, index) {
     </section>
 
     <div class="detail-content">
+      ${renderQuickActions(day)}
+
       <section class="detail-section">
         <h3 class="section-title">Plan</h3>
         <div class="tags-wrap">${highlights}</div>
