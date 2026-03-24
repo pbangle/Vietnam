@@ -300,6 +300,56 @@
         padding: 14px 16px 26px;
       }
 
+      .detail-cover {
+        position: relative;
+        overflow: hidden;
+        min-height: 220px;
+        margin-bottom: 18px;
+        border-radius: 24px;
+        border: 1px solid var(--border);
+        box-shadow: var(--shadow-soft);
+        background: var(--card);
+      }
+
+      .detail-cover-image {
+        display: block;
+        width: 100%;
+        height: 220px;
+        object-fit: cover;
+      }
+
+      .detail-cover-overlay {
+        position: absolute;
+        inset: 0;
+        display: flex;
+        align-items: flex-end;
+        padding: 18px;
+        background: linear-gradient(180deg, rgba(16, 12, 16, 0.08), rgba(16, 12, 16, 0.72));
+      }
+
+      .detail-cover-meta {
+        display: grid;
+        gap: 4px;
+      }
+
+      .detail-cover-kicker {
+        font-size: 11px;
+        letter-spacing: 0.16em;
+        text-transform: uppercase;
+        color: rgba(255, 255, 255, 0.78);
+      }
+
+      .detail-cover-title {
+        font-size: 28px;
+        line-height: 1.02;
+        letter-spacing: -0.03em;
+      }
+
+      .detail-cover-caption {
+        color: rgba(255, 255, 255, 0.84);
+        font-size: 14px;
+      }
+
       .detail-hero {
         margin-bottom: 20px;
       }
@@ -451,6 +501,51 @@
         background: rgba(255,255,255,0.07);
       }
 
+      .day-nav {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        align-items: center;
+        margin-top: 2px;
+      }
+
+      .day-nav-status {
+        order: -1;
+        flex: 1 0 100%;
+        text-align: center;
+        color: var(--muted-2);
+        font-size: 11px;
+        text-transform: uppercase;
+        letter-spacing: 0.14em;
+      }
+
+      .day-nav-btn {
+        flex: 1 1 0;
+        min-height: 48px;
+        border: 1px solid var(--border-strong);
+        background: rgba(255,255,255,0.05);
+        color: var(--text);
+        border-radius: 16px;
+        padding: 12px 14px;
+        cursor: pointer;
+        transition:
+          transform 0.16s ease,
+          background 0.16s ease,
+          border-color 0.16s ease;
+      }
+
+      .day-nav-btn:hover {
+        transform: translateY(-1px);
+        background: rgba(255,255,255,0.07);
+        border-color: rgba(239, 179, 192, 0.24);
+      }
+
+      .day-nav-btn:disabled {
+        opacity: 0.42;
+        cursor: default;
+        transform: none;
+      }
+
       @media (min-width: 761px) {
         .overlay {
           padding: 16px;
@@ -521,6 +616,19 @@
           padding-bottom: max(24px, env(safe-area-inset-bottom));
         }
 
+        .detail-cover {
+          min-height: 190px;
+          border-radius: 22px;
+        }
+
+        .detail-cover-image {
+          height: 190px;
+        }
+
+        .detail-cover-title {
+          font-size: 24px;
+        }
+
         .detail-title {
           font-size: 28px;
         }
@@ -551,7 +659,7 @@
       <div class="overlay-panel" role="dialog" aria-modal="true">
         <div class="overlay-bar">
           <button id="closeOverlay" class="close-btn" type="button">← Back</button>
-          <span class="overlay-hint">Day details</span>
+          <span id="overlayHint" class="overlay-hint">Day details</span>
         </div>
         <div id="overlayContent" class="overlay-scroll"></div>
       </div>

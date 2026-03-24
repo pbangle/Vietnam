@@ -80,6 +80,46 @@ function getRoadmapLabel(day) {
   return day.subtitle || day.title || place;
 }
 
+function renderCover(day) {
+  if (!day.cover) return "";
+
+  return `
+    <section class="detail-cover">
+      <img
+        class="detail-cover-image"
+        src="${day.cover}"
+        alt="${escapeHtml(day.coverAlt || `${day.coverTitle || day.title} cover image`)}"
+      />
+      <div class="detail-cover-overlay">
+        <div class="detail-cover-meta">
+          <span class="detail-cover-kicker">${escapeHtml(day.date)} · ${escapeHtml(getRoadmapLabel(day))}</span>
+          <strong class="detail-cover-title">${escapeHtml(day.coverTitle || day.title)}</strong>
+          <span class="detail-cover-caption">${escapeHtml(day.city || "")}</span>
+        </div>
+      </div>
+    </section>
+  `;
+}
+
+function renderDayNav(index) {
+  const isFirst = index === 0;
+  const isLast = index === itinerary.length - 1;
+
+  return `
+    <section class="detail-section">
+      <div class="day-nav">
+        <div class="day-nav-status">Day ${index + 1} of ${itinerary.length}</div>
+        <button class="day-nav-btn" type="button" data-nav="prev" ${isFirst ? "disabled" : ""}>
+          ← Previous day
+        </button>
+        <button class="day-nav-btn" type="button" data-nav="next" ${isLast ? "disabled" : ""}>
+          Next day →
+        </button>
+      </div>
+    </section>
+  `;
+}
+
 function renderDayDetail(day, index) {
   const highlights = (day.highlights || [])
     .map((item) => `<span class="tag">${escapeHtml(item)}</span>`)
@@ -117,6 +157,8 @@ function renderDayDetail(day, index) {
     : "";
 
   return `
+    ${renderCover(day)}
+
     <section class="detail-hero">
       <div class="detail-top-row">
         <span class="date-badge">${escapeHtml(day.date)}</span>
@@ -128,7 +170,7 @@ function renderDayDetail(day, index) {
       </h2>
 
       <p class="detail-subtitle">
-        Day ${index + 1} of ${itinerary.length} · ${escapeHtml(day.subtitle)}
+        ${escapeHtml(day.subtitle)}
       </p>
 
       <p class="city">${escapeHtml(day.city)}</p>
@@ -143,6 +185,7 @@ function renderDayDetail(day, index) {
       ${transport}
       ${sleep}
       ${sleepOptions}
+      ${renderDayNav(index)}
     </div>
   `;
 }
@@ -151,6 +194,7 @@ const app = document.getElementById("app");
 const overlay = document.getElementById("dayOverlay");
 const overlayContent = document.getElementById("overlayContent");
 const closeOverlayButton = document.getElementById("closeOverlay");
+const overlayHint = document.getElementById("overlayHint");
 
 let activeIndex = null;
 
@@ -170,9 +214,15 @@ function openDay(index) {
 
   activeIndex = index;
   overlayContent.innerHTML = renderDayDetail(day, index);
+  overlayContent.scrollTop = 0;
   overlay.classList.add("open");
   overlay.setAttribute("aria-hidden", "false");
   document.body.classList.add("overlay-open");
+
+  if (overlayHint) {
+    overlayHint.textContent = `Day ${index + 1} of ${itinerary.length}`;
+  }
+
   updateActiveState();
 }
 
@@ -181,7 +231,22 @@ function closeDay() {
   overlay.classList.remove("open");
   overlay.setAttribute("aria-hidden", "true");
   document.body.classList.remove("overlay-open");
+
+  if (overlayHint) {
+    overlayHint.textContent = "Day details";
+  }
+
   updateActiveState();
+}
+
+function goToRelativeDay(direction) {
+  if (activeIndex === null) return;
+
+  const nextIndex = direction === "next" ? activeIndex + 1 : activeIndex - 1;
+
+  if (nextIndex >= 0 && nextIndex < itinerary.length) {
+    openDay(nextIndex);
+  }
 }
 
 app.innerHTML = itinerary
@@ -215,11 +280,33 @@ closeOverlayButton.addEventListener("click", closeDay);
 overlay.addEventListener("click", (event) => {
   if (event.target === overlay) {
     closeDay();
+    return;
+  }
+
+  const navButton = event.target.closest(".day-nav-btn");
+  if (!navButton || navButton.disabled) return;
+
+  if (navButton.dataset.nav === "prev") {
+    goToRelativeDay("prev");
+  }
+
+  if (navButton.dataset.nav === "next") {
+    goToRelativeDay("next");
   }
 });
 
 document.addEventListener("keydown", (event) => {
-  if (event.key === "Escape" && overlay.classList.contains("open")) {
+  if (!overlay.classList.contains("open")) return;
+
+  if (event.key === "Escape") {
     closeDay();
+  }
+
+  if (event.key === "ArrowLeft") {
+    goToRelativeDay("prev");
+  }
+
+  if (event.key === "ArrowRight") {
+    goToRelativeDay("next");
   }
 });
