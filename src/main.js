@@ -90,13 +90,6 @@ function renderCover(day) {
         src="${day.cover}"
         alt="${escapeHtml(day.coverAlt || `${day.coverTitle || day.title} cover image`)}"
       />
-      <div class="detail-cover-overlay">
-        <div class="detail-cover-meta">
-          <span class="detail-cover-kicker">${escapeHtml(day.date)} · ${escapeHtml(getRoadmapLabel(day))}</span>
-          <strong class="detail-cover-title">${escapeHtml(day.coverTitle || day.title)}</strong>
-          <span class="detail-cover-caption">${escapeHtml(day.city || "")}</span>
-        </div>
-      </div>
     </section>
   `;
 }

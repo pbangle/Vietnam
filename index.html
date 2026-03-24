@@ -318,36 +318,12 @@
         object-fit: cover;
       }
 
-      .detail-cover-overlay {
+      .detail-cover::after {
+        content: "";
         position: absolute;
         inset: 0;
-        display: flex;
-        align-items: flex-end;
-        padding: 18px;
-        background: linear-gradient(180deg, rgba(16, 12, 16, 0.08), rgba(16, 12, 16, 0.72));
-      }
-
-      .detail-cover-meta {
-        display: grid;
-        gap: 4px;
-      }
-
-      .detail-cover-kicker {
-        font-size: 11px;
-        letter-spacing: 0.16em;
-        text-transform: uppercase;
-        color: rgba(255, 255, 255, 0.78);
-      }
-
-      .detail-cover-title {
-        font-size: 28px;
-        line-height: 1.02;
-        letter-spacing: -0.03em;
-      }
-
-      .detail-cover-caption {
-        color: rgba(255, 255, 255, 0.84);
-        font-size: 14px;
+        background: linear-gradient(180deg, rgba(16, 12, 16, 0.02), rgba(16, 12, 16, 0.18));
+        pointer-events: none;
       }
 
       .detail-hero {
@@ -623,10 +599,6 @@
 
         .detail-cover-image {
           height: 190px;
-        }
-
-        .detail-cover-title {
-          font-size: 24px;
         }
 
         .detail-title {
