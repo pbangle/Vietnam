@@ -650,6 +650,42 @@
         line-height: 1.6;
       }
 
+      .instructions-link {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+        text-decoration: none;
+        border: 1px solid var(--border-strong);
+        background: rgba(255,255,255,0.05);
+        color: var(--text);
+        border-radius: 16px;
+        padding: 14px 16px;
+        min-height: 54px;
+        transition:
+          transform 0.16s ease,
+          background 0.16s ease,
+          border-color 0.16s ease;
+      }
+
+      .instructions-link:hover {
+        transform: translateY(-1px);
+        background: rgba(255,255,255,0.08);
+        border-color: rgba(239, 179, 192, 0.24);
+      }
+
+      .instructions-link-icon {
+        width: 30px;
+        height: 30px;
+        border-radius: 999px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        background: rgba(255, 255, 255, 0.08);
+        font-size: 15px;
+        flex: 0 0 auto;
+      }
+
       @media (min-width: 761px) {
         .overlay {
           padding: 16px;
@@ -757,6 +793,10 @@
         .instructions-text {
           font-size: 15px;
         }
+
+        .instructions-link {
+          width: 100%;
+        }
       }
     </style>
   </head>
@@ -819,6 +859,19 @@
                 <li>Princess will get princess treatment from her man.</li>
                 <li>With just one word, he will give mimitos “animals”.</li>
               </ul>
+            </section>
+
+            <section class="instructions-card">
+              <h3 class="section-title">Relax time</h3>
+              <a
+                class="instructions-link"
+                href="https://2years2hearts.netlify.app/"
+                target="_blank"
+                rel="noreferrer"
+              >
+                <span class="instructions-link-icon" aria-hidden="true">♡</span>
+                <span>Relax time</span>
+              </a>
             </section>
           </div>
         </div>
