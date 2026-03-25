@@ -1,3 +1,48 @@
+const makeCover = ({ title, subtitle, date, colors }) => {
+  const [c1, c2, c3] = colors;
+
+  const svg = `
+    <svg width="1200" height="900" viewBox="0 0 1200 900" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <linearGradient id="bg" x1="108" y1="78" x2="1042" y2="834" gradientUnits="userSpaceOnUse">
+          <stop stop-color="${c1}" />
+          <stop offset="0.55" stop-color="${c2}" />
+          <stop offset="1" stop-color="${c3}" />
+        </linearGradient>
+        <radialGradient id="glow1" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(935 210) rotate(120) scale(520 520)">
+          <stop stop-color="white" stop-opacity="0.22"/>
+          <stop offset="1" stop-color="white" stop-opacity="0"/>
+        </radialGradient>
+        <radialGradient id="glow2" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(260 730) rotate(65) scale(430 430)">
+          <stop stop-color="white" stop-opacity="0.12"/>
+          <stop offset="1" stop-color="white" stop-opacity="0"/>
+        </radialGradient>
+      </defs>
+
+      <rect width="1200" height="900" rx="0" fill="url(#bg)"/>
+      <rect width="1200" height="900" fill="url(#glow1)"/>
+      <rect width="1200" height="900" fill="url(#glow2)"/>
+
+      <circle cx="1020" cy="186" r="146" fill="white" fill-opacity="0.08"/>
+      <circle cx="910" cy="262" r="236" stroke="white" stroke-opacity="0.10" stroke-width="2"/>
+      <circle cx="210" cy="734" r="160" stroke="white" stroke-opacity="0.08" stroke-width="2"/>
+
+      <path d="M-30 716C138 608 314 578 495 622C644 658 741 726 898 736C1011 744 1100 715 1230 640V930H-30V716Z" fill="white" fill-opacity="0.08"/>
+      <path d="M-40 790C95 704 240 680 387 705C526 730 637 799 802 811C942 821 1068 785 1240 676V930H-40V790Z" fill="white" fill-opacity="0.06"/>
+
+      <rect x="72" y="74" width="164" height="42" rx="21" fill="white" fill-opacity="0.14"/>
+      <text x="107" y="101" fill="white" font-family="Inter, Arial, sans-serif" font-size="20" font-weight="700">${date}</text>
+
+      <text x="72" y="660" fill="white" font-family="Inter, Arial, sans-serif" font-size="88" font-weight="800" letter-spacing="-2">${title}</text>
+      <text x="76" y="720" fill="white" fill-opacity="0.92" font-family="Inter, Arial, sans-serif" font-size="30" font-weight="500">${subtitle}</text>
+
+      <text x="72" y="834" fill="white" fill-opacity="0.72" font-family="Inter, Arial, sans-serif" font-size="22" letter-spacing="4">GEMMA &amp; ALEX</text>
+    </svg>
+  `.trim();
+
+  return `data:image/svg+xml;charset=UTF-8,${encodeURIComponent(svg)}`;
+};
+
 const itinerary = [
   {
     date: "27/03",
@@ -36,34 +81,31 @@ const itinerary = [
     coverTitle: "Hoi An Arrival",
     cover: makeCover({
       title: "Hoi An",
-      subtitle: "Arrival + lantern atmosphere",
+      subtitle: "Flight + evening by the river",
       date: "28/03",
       colors: ["#4a1f18", "#c56a2e", "#e7b65d"],
     }),
-    subtitle: "Slow morning, flight, and easy first Hoi An evening",
+    subtitle: "Slow morning, flight, evening in Hoi An",
     city: "Ho Chi Minh → Da Nang → Hoi An",
     mood: "Travel day",
     icon: "✈",
     transport: [
       "13:45–14:00 · Leave for the airport",
       "Flight Ho Chi Minh → Da Nang · 16:55–18:05 · 106€",
-      "18:05–18:40 · Bags + airport exit",
-      "18:40–19:25 · Taxi to Hoi An",
-      "20:15–20:30 · Taxi / shuttle into Old Town",
-      "22:15–22:30 · Back to hotel",
+      "Taxi Da Nang → Hoi An · 45 min",
     ],
     highlights: [
-      "08:30–10:15 · Relaxed breakfast + café",
-      "10:15–11:30 · Nguyen Hue / riverfront stroll",
-      "11:30–12:30 · Early lunch",
-      "12:30–13:15 · Back to hotel, collect bags, final reset",
-      "19:30-ish · Check-in at Legacy Hoi An Resort",
-      "20:30–22:15 · Slow lantern walk around riverside / Tran Phu / Bach Dang",
-      "Dinner by the river · keep it light, atmosphere only",
+      "08:30–10:30 · Slow breakfast + cafés + Nguyen Hue / riverfront",
+      "10:30–12:00 · Free time: central area, extra café time, or light shopping",
+      "12:00–13:00 · Early lunch",
+      "13:00–13:30 · Back to hotel, collect bags",
+      "Old Town",
+      "Lanterns",
+      "Dinner by the river",
     ],
     sleep: {
       place: "Legacy Hoi An Resort",
-      note: "Already paid · free cancellation until 12 March · around 10 min from Old Town",
+      note: "Already paid · free cancellation until 12 March · 114€",
       price: "114€",
       url: "https://www.booking.com/hotel/vn/legacy-hoi-an-resort.es.html?aid=2336990&label=en-au-booking-desktop-LWJbXP0fLLuHVdmWiiFIygS652804038914%3Apl%3Ata%3Ap1%3Ap2%3Aac%3Aap%3Aneg%3Afi%3Atikwd-1214534129%3Alp9071353%3Ali%3Adec%3Adm&sid=cfa4356566fdcc3ae56de0018bf5c400&all_sr_blocks=59405234_0_2_1_0&checkin=2026-03-28&checkout=2026-03-30&dest_id=7048231&dest_type=hotel&dist=0&group_adults=2&group_children=0&hapos=10&highlighted_blocks=59405234_0_2_1_0&hpos=10&matching_block_id=59405234_0_2_1_0&nflt=oos%3D1&no_rooms=1&req_adults=2&req_children=0&room1=A%2CA&sb_price_type=total&sr_order=popularity&sr_pri_blocks=59405234_0_2_1_0__350266168&srepoch=1772758534&srpvid=68cd02ac6d2b01fb&type=total&ucfs=1#map_closed",
     },
@@ -72,25 +114,22 @@ const itinerary = [
     date: "29/03",
     title: "Hoi An",
     roadmapTitle: "Full day in Hoi An",
-    coverTitle: "Proper Hoi An Day",
+    coverTitle: "Full Day in Hoi An",
     cover: makeCover({
       title: "Hoi An",
-      subtitle: "Beach or countryside + full Ancient Town",
+      subtitle: "Lanterns, cafés and a slow day",
       date: "29/03",
       colors: ["#66311f", "#b44f39", "#efb95f"],
     }),
-    subtitle: "Relaxed morning and proper Ancient Town from mid-afternoon",
+    subtitle: "Full day",
     city: "Hoi An",
-    mood: "Full Hoi An day",
+    mood: "Relax day",
     icon: "✦",
     highlights: [
-      "08:30–09:30 · Slow breakfast at the resort",
-      "09:30–11:30 · An Bang Beach or Cam Thanh / Tra Que countryside",
-      "11:45–13:15 · Lunch",
-      "13:15–15:00 · Back to hotel / pool / shower / rest",
-      "15:30–18:30 · Ancient Town proper · use heritage ticket well",
-      "Japanese Covered Bridge + old house + assembly hall / museum + market area",
-      "18:30–21:30 · Lantern hours · riverside walk · dinner · café / bar",
+      "Coconut basket boats or An Bang beach",
+      "Cute cafés",
+      "Market",
+      "Lanterns again at night",
     ],
     sleep: {
       place: "Legacy Hoi An Resort",
@@ -102,36 +141,31 @@ const itinerary = [
   {
     date: "30/03",
     title: "Hoi An → Hue → Hanoi",
-    roadmapTitle: "Hue route + night train",
-    coverTitle: "Scenic Hue Route",
+    roadmapTitle: "Hue + night train",
+    coverTitle: "Hue & Night Train",
     cover: makeCover({
       title: "Hue",
-      subtitle: "Early departure + efficient historic stop",
+      subtitle: "Scenic transfer + night train",
       date: "30/03",
       colors: ["#2d1c4a", "#5a3d96", "#4eb0c5"],
     }),
-    subtitle: "Early departure, scenic Hai Van Pass route, then efficient Hue before train",
+    subtitle: "Scenic transfer + night train",
     city: "Hoi An → Hue → Hanoi",
     mood: "Scenic transfer",
     icon: "✦",
     transport: [
-      "07:00–08:00 · Breakfast + check-out prep",
-      "08:00–08:30 · Final check-out, car arrives",
-      "08:30–12:00 / 12:30 · Private car Hoi An → Hue with scenic stops",
-      "Hai Van Pass viewpoint + possible short Lang Co stop",
+      "Private car or taxi Hoi An → Hue",
+      "Stop at Hai Van Pass",
       "Night train Hue → Hanoi · 121.62€",
     ],
     highlights: [
-      "12:30–13:30 · Lunch in Hue",
-      "13:45–16:00 · Imperial City",
-      "16:15–17:00 · Thien Mu Pagoda",
-      "17:15–18:30 · Early dinner / café / buffer before train",
-      "Treat the drive itself as part of the experience",
-      "Keep Hue focused and efficient, not overloaded",
+      "Imperial City",
+      "Thien Mu Pagoda",
+      "Sleep on the train",
     ],
     sleep: {
       place: "Night train",
-      note: "Sleep on the train after Hue",
+      note: "You sleep on the train",
       price: "121.62€",
     },
   },
