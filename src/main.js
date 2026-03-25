@@ -281,9 +281,21 @@ const overlayContent = document.getElementById("overlayContent");
 const closeOverlayButton = document.getElementById("closeOverlay");
 const overlayHint = document.getElementById("overlayHint");
 
+const instructionsOverlay = document.getElementById("instructionsOverlay");
+const openInstructionsButton = document.getElementById("openInstructions");
+const closeInstructionsButton = document.getElementById("closeInstructions");
+
 let activeIndex = null;
 
 app.style.setProperty("--day-count", String(itinerary.length));
+
+function anyOverlayOpen() {
+  return overlay.classList.contains("open") || instructionsOverlay.classList.contains("open");
+}
+
+function syncBodyLock() {
+  document.body.classList.toggle("overlay-open", anyOverlayOpen());
+}
 
 function updateActiveState() {
   const buttons = app.querySelectorAll(".roadmap-item");
@@ -302,12 +314,12 @@ function openDay(index) {
   overlayContent.scrollTop = 0;
   overlay.classList.add("open");
   overlay.setAttribute("aria-hidden", "false");
-  document.body.classList.add("overlay-open");
 
   if (overlayHint) {
     overlayHint.textContent = `Day ${index + 1} of ${itinerary.length}`;
   }
 
+  syncBodyLock();
   updateActiveState();
 }
 
@@ -315,13 +327,25 @@ function closeDay() {
   activeIndex = null;
   overlay.classList.remove("open");
   overlay.setAttribute("aria-hidden", "true");
-  document.body.classList.remove("overlay-open");
 
   if (overlayHint) {
     overlayHint.textContent = "Day details";
   }
 
+  syncBodyLock();
   updateActiveState();
+}
+
+function openInstructions() {
+  instructionsOverlay.classList.add("open");
+  instructionsOverlay.setAttribute("aria-hidden", "false");
+  syncBodyLock();
+}
+
+function closeInstructions() {
+  instructionsOverlay.classList.remove("open");
+  instructionsOverlay.setAttribute("aria-hidden", "true");
+  syncBodyLock();
 }
 
 function goToRelativeDay(direction) {
@@ -361,6 +385,8 @@ app.addEventListener("click", (event) => {
 });
 
 closeOverlayButton.addEventListener("click", closeDay);
+openInstructionsButton.addEventListener("click", openInstructions);
+closeInstructionsButton.addEventListener("click", closeInstructions);
 
 overlay.addEventListener("click", (event) => {
   if (event.target === overlay) {
@@ -380,12 +406,26 @@ overlay.addEventListener("click", (event) => {
   }
 });
 
-document.addEventListener("keydown", (event) => {
-  if (!overlay.classList.contains("open")) return;
-
-  if (event.key === "Escape") {
-    closeDay();
+instructionsOverlay.addEventListener("click", (event) => {
+  if (event.target === instructionsOverlay) {
+    closeInstructions();
   }
+});
+
+document.addEventListener("keydown", (event) => {
+  if (event.key === "Escape") {
+    if (instructionsOverlay.classList.contains("open")) {
+      closeInstructions();
+      return;
+    }
+
+    if (overlay.classList.contains("open")) {
+      closeDay();
+      return;
+    }
+  }
+
+  if (!overlay.classList.contains("open")) return;
 
   if (event.key === "ArrowLeft") {
     goToRelativeDay("prev");

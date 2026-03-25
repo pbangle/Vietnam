@@ -91,6 +91,41 @@
         pointer-events: none;
       }
 
+      .hero-top {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        gap: 12px;
+      }
+
+      .hero-copy {
+        min-width: 0;
+      }
+
+      .hero-action {
+        flex: 0 0 auto;
+      }
+
+      .hero-btn {
+        border: 1px solid var(--border-strong);
+        background: rgba(255,255,255,0.05);
+        color: white;
+        border-radius: 999px;
+        padding: 10px 14px;
+        cursor: pointer;
+        transition:
+          transform 0.16s ease,
+          background 0.16s ease,
+          border-color 0.16s ease;
+        white-space: nowrap;
+      }
+
+      .hero-btn:hover {
+        transform: translateY(-1px);
+        background: rgba(255,255,255,0.08);
+        border-color: rgba(239, 179, 192, 0.24);
+      }
+
       .title {
         font-size: 32px;
         line-height: 0.98;
@@ -579,6 +614,42 @@
         transform: none;
       }
 
+      .instructions-wrap {
+        display: grid;
+        gap: 14px;
+      }
+
+      .instructions-card {
+        background: var(--card);
+        border: 1px solid var(--border);
+        border-radius: 24px;
+        padding: 20px;
+        box-shadow: var(--shadow-soft);
+      }
+
+      .instructions-title {
+        margin: 0 0 10px;
+        font-size: 28px;
+        line-height: 1.02;
+        letter-spacing: -0.03em;
+      }
+
+      .instructions-text {
+        margin: 0;
+        color: var(--muted);
+        font-size: 16px;
+        line-height: 1.65;
+      }
+
+      .instructions-list {
+        margin: 0;
+        padding-left: 20px;
+        color: var(--muted);
+        display: grid;
+        gap: 10px;
+        line-height: 1.6;
+      }
+
       @media (min-width: 761px) {
         .overlay {
           padding: 16px;
@@ -603,6 +674,15 @@
         .hero {
           padding: 16px 16px 14px;
           border-radius: 22px;
+        }
+
+        .hero-top {
+          flex-direction: column;
+          align-items: stretch;
+        }
+
+        .hero-btn {
+          width: 100%;
         }
 
         .title {
@@ -669,6 +749,14 @@
         .map-action {
           width: 100%;
         }
+
+        .instructions-title {
+          font-size: 24px;
+        }
+
+        .instructions-text {
+          font-size: 15px;
+        }
       }
     </style>
   </head>
@@ -676,10 +764,18 @@
     <main class="page">
       <div class="container">
         <section class="hero">
-          <h1 class="title">Gemma & Alex in Vietnam</h1>
-          <p class="subtitle">
-            11 days across Ho Chi Minh, Hoi An, Hue, Ninh Binh, Hanoi &amp; Ha Long
-          </p>
+          <div class="hero-top">
+            <div class="hero-copy">
+              <h1 class="title">Gemma & Alex in Vietnam</h1>
+              <p class="subtitle">
+                11 days across Ho Chi Minh, Hoi An, Hue, Ninh Binh, Hanoi &amp; Ha Long
+              </p>
+            </div>
+
+            <div class="hero-action">
+              <button id="openInstructions" class="hero-btn" type="button">Trip Instructions</button>
+            </div>
+          </div>
 
           <div class="top-summary">
             <span class="pill">27/03 → 06/04</span>
@@ -699,6 +795,33 @@
           <span id="overlayHint" class="overlay-hint">Day details</span>
         </div>
         <div id="overlayContent" class="overlay-scroll"></div>
+      </div>
+    </div>
+
+    <div id="instructionsOverlay" class="overlay" aria-hidden="true">
+      <div class="overlay-panel" role="dialog" aria-modal="true">
+        <div class="overlay-bar">
+          <button id="closeInstructions" class="close-btn" type="button">← Back</button>
+          <span class="overlay-hint">Trip instructions</span>
+        </div>
+        <div class="overlay-scroll">
+          <div class="instructions-wrap">
+            <section class="instructions-card">
+              <h2 class="instructions-title">Trip Instructions</h2>
+              <p class="instructions-text">
+                Princess can have as many sweets as she wants and as many pho as she wants.
+              </p>
+            </section>
+
+            <section class="instructions-card">
+              <h3 class="section-title">Princess treatment rules</h3>
+              <ul class="instructions-list">
+                <li>Princess will get princess treatment from her man.</li>
+                <li>With just one word, he will give mimitos “animals”.</li>
+              </ul>
+            </section>
+          </div>
+        </div>
       </div>
     </div>
 
