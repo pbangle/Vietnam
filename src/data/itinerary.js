@@ -65,7 +65,7 @@ const itinerary = [
       "11:15–11:45 · Get ready for the Cu Chi tunnels plan",
       "12:00 · Cu Chi tunnels tour",
       "Back in the city later in the afternoon / evening",
-      "Light dinner, Nguyen Hue / Saigon river walk or rooftop if you still have energy",
+      "Light dinner, Nguyen Hue / Saigon river walk or rooftop only if you still have energy",
     ],
     sleep: {
       place: "CityHouse - City Oasis",
@@ -100,11 +100,11 @@ const itinerary = [
     ],
     highlights: [
       "08:30–10:15 · Relaxed breakfast + easy café morning",
-      "10:15–11:30 · Free time nearby / packing / light stroll",
+      "10:15–11:30 · Free time nearby / packing / short stroll only",
       "11:30–12:30 · Early lunch",
       "12:30–13:15 · Back to hotel, collect bags, final reset",
-      "20:30–22:15 · Slow lantern walk around Tran Phu / Bach Dang / riverside area",
-      "Dinner by the river",
+      "20:30–22:15 · Slow lantern walk around Tran Phu / Bach Dang / riverside area in Hoi An",
+      "Simple dinner by the river in Hoi An",
       "Keep it light · first contact evening only",
     ],
     sleep: {
